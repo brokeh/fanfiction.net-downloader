@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Introduction</title>
+	<link rel="stylesheet" href="style/main.css" type="text/css" />
+</head>
+<body>
+	<h1>{{book.title}}</h1>
+	<p><b>By: {{book.author.name}}</b></p>
+	<p><i>{{book.blurb}}</i></p>
+	<hr/>
+	<div class="cover-details">
+		<p>
+			{% if book.metadata.genre -%}
+				<b>Genre:</b> {{book.metadata.genre}}<br/>
+			{%- endif %}
+			<b>Rating:</b> {{book.metadata.rating}}<br/>
+			<b>Category:</b> {{book.metadata.category|join(' > ')}}<br/>
+			{% if book.metadata.characters -%}
+				<b>Characters:</b> {{book.metadata.characters}}<br/>
+			{%- endif %}
+		</p>
+		{#
+		<p>
+			{% if (book.chapters|length) > 1 -%}
+				<b>Chapters:</b> {{book.chapters|length}}<br/>
+			{%- endif %}
+			{% if book.metadata.words -%}
+				<b>Words:</b> {{book.metadata.words}}<br/>
+			{%- endif %}
+		</p>
+		#}
+		<p>
+			{# <b>Status:</b> {{book.status}}<br/> #}
+			<b>Published:</b> {{book.created_time|format_epoch_time('%e %b %Y')}}<br/>
+			{% if book.updated_time -%}
+				<b>Updated:</b> {{book.updated_time|format_epoch_time('%e %b %Y')}}<br/>
+			{%- endif %}
+			<b>Downloaded:</b> {{book.download_time|format_epoch_time('%e %b %Y')}}<br/>
+		</p>
+		<p></p>
+		<p>
+			<b>Downloaded from:</b> <a rel="noopener noreferrer" href="{{book.source|safe}}">{{book.source}}</a><br/>
+			{% if book.metadata.reviews -%}
+				<b>Reviews:</b> {{book.metadata.reviews}} / 
+			{%-endif %}
+			{% if book.metadata.favs -%}
+				<b>Favs:</b> {{book.metadata.favs}} / 
+			{%-endif %}
+			{% if book.metadata.follows -%}
+				<b>Follows:</b> {{book.metadata.follows}}
+			{%-endif %}
+		</p>
+	</div>
+</body>
+</html>

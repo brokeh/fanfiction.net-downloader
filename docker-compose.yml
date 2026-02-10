@@ -1,0 +1,13 @@
+services:
+  dev: &dev
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/work
+    working_dir: /work
+
+  cargo:
+    <<: *dev
+    working_dir: /work/json2epub
+    entrypoint: cargo
