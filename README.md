@@ -1,20 +1,28 @@
 # FanFiction.net EPUB downloader
 
-This is a Tampermonkey/Greasemonkey script that adds a download button to [fanfiction.net](https://www.fanfiction.net/) to allow downloading stories in EPUB format so they can be read on e-Readers or any other eBook reader of your choice.
+This is a [Tampermonkey](https://www.tampermonkey.net/)/[Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) script that adds a download button to [fanfiction.net](https://www.fanfiction.net/) to allow downloading stories in EPUB format so they can be read on e-Readers or any other eBook reader of your choice.
+
 
 # Supported platforms
-| Browser                              | Windows, MacOS & Linux | Android | iOS |
-|--------------------------------------|:----------------------:|:-------:|:---:|
-| ![](docs/images/chrome.svg) Chrome   | ✅                     | ❌     | ❌  |
-| ![](docs/images/firefox.svg) FireFox | ✅                     | ✅     | ❌  |
-| ![](docs/images/msedge.svg) Edge     | ❔                     | ❔     | ❌  |
-
+This script is supported in any browser that supports installing extensions.
+| Browser                                              | Windows, MacOS & Linux | Android | iOS |
+|------------------------------------------------------|:----------------------:|:-------:|:---:|
+| ![](docs/images/chrome.svg) Chrome (and derivatives) | ✅                     | ❌     | ❌  |
+| ![](docs/images/firefox.svg) FireFox                 | ✅                     | ✅     | ❌  |
+| ![](docs/images/msedge.svg) Edge                     | ✅                     | ❔     | ❌  |
+| ![](docs/images/safari.svg) Safari                   | ✅                     | ❌     | ✅  |
 
 
 # Installation
-1. Download either the [Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) (Chrome) or [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) (Firefox) browser extension.
-2. Click on [this link](https://github.com/brokeh/fanfiction.net-downloader/releases/latest/download/fanfiction.net-download.user.js) to add this script to Tampermonkey/Greasemonkey.
+1. Download the Tampermonkey extension for your browser:
 
+    ![](docs/images/chrome.svg) Chrome (and derivatives): [https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)<br/>
+    ![](docs/images/firefox.svg) FireFox: [https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)<br/>
+    ![](docs/images/msedge.svg) Edge: [https://microsoftedge.microsoft.com/addons/detail/iikmkjmpaadaobahmlepeloendndfphd](https://microsoftedge.microsoft.com/addons/detail/iikmkjmpaadaobahmlepeloendndfphd)<br/>
+    ![](docs/images/safari.svg) Safari: [https://apps.apple.com/us/app-bundle/tampermonkey-bundle/id1780757125?mt=12](https://apps.apple.com/us/app-bundle/tampermonkey-bundle/id1780757125?mt=12)<br/>
+2. Click on [this link](https://github.com/brokeh/fanfiction.net-downloader/releases/latest/download/fanfiction.net-download.user.js) to add this script to Tampermonkey.
+
+Installation for macOS & iOS is a little bit more involved, but still possible. I don't use Apple platforms so can't adequately say how to do it.
 
 
 # Usage
@@ -28,7 +36,6 @@ On Android there's a new download icon next to the _More_ dropdown in the toolba
 
 
 Once clicked, you'll see a popup indicating the progress. The file will download shortly after every chapter has finished downloading.
-
 
 
 # Design
