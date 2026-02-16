@@ -12,6 +12,12 @@ def local_file_path(file_name):
 def pkg_file_path(file_name):
     return path.join(path.dirname(__file__), '..', 'json2epub', 'pkg', file_name)
 
+def extract_gm_metadata(gm_script):
+    lines = gm_script.splitlines()
+    first_line = lines.index('// ==UserScript==')
+    last_line = lines.index('// ==/UserScript==')
+    return ''.join(f'{l}\n' for l in lines[first_line:last_line+1])
+
 parser = ArgumentParser()
 parser.add_argument('--publish', metavar='VERSION', required=False, help='Include extra metadata suitable for publishing the script to GitHub')
 args = parser.parse_args()
@@ -31,12 +37,18 @@ if args.publish:
     final_script = (
         final_script[:ins_idx]
         + f'// @version      {args.publish}\n'
-        + '// @updateURL    https://github.com/brokeh/fanfiction.net-downloader/releases/latest/download/fanfiction.net-download.user.js\n'
+        + '// @updateURL    https://github.com/brokeh/fanfiction.net-downloader/releases/latest/download/fanfiction.net-download.meta.js\n'
+        + '// @downloadURL  https://github.com/brokeh/fanfiction.net-downloader/releases/latest/download/fanfiction.net-download.user.js\n'
         + final_script[ins_idx:]
     )
 
 output_file_name = local_file_path('fanfiction.net-download.user.js')
 with open(output_file_name, 'w', encoding='utf-8') as f:
     f.write(final_script)
+
+if args.publish:
+    output_file_name = local_file_path('fanfiction.net-download.meta.js')
+    with open(output_file_name, 'w', encoding='utf-8') as f:
+        f.write(extract_gm_metadata(final_script))
 
 print(f'Successfully generated {output_file_name}')

@@ -3,6 +3,7 @@
 
 /json2epub-cli/target/
 
+user-script/fanfiction.net-download.meta.js
 user-script/fanfiction.net-download.user.js
 
 Cargo.lock
