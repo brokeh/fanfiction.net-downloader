@@ -318,13 +318,17 @@
         return book;
     }
 
+    function sanitise_as_xhtml(node) {
+        return new XMLSerializer().serializeToString(node);
+    }
+
     function parse_chapter_desktop(html_doc, chapter) {
-        chapter.contents = html_doc.getElementById('storytext').innerHTML;
+        chapter.contents = sanitise_as_xhtml(html_doc.getElementById('storytext'));
         chapter.error = null;
     }
 
     function parse_chapter_mobile(html_doc, chapter) {
-        chapter.contents = html_doc.getElementById('storycontent').innerHTML;
+        chapter.contents = sanitise_as_xhtml(html_doc.getElementById('storycontent'));
         chapter.error = null;
     }
 
