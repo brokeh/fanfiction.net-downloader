@@ -42,15 +42,21 @@
 		<p></p>
 		<p>
 			<b>Downloaded from:</b> <a rel="noopener noreferrer" href="{{book.source|safe}}">{{book.source}}</a><br/>
+			{% set needs_slash = 0 %}
 			{% if book.metadata.reviews -%}
-				<b>Reviews:</b> {{book.metadata.reviews}} / 
-			{%-endif %}
+				<b>Reviews:</b> {{book.metadata.reviews}}
+				{% set needs_slash = 1 %}
+			{%- endif %}
 			{% if book.metadata.favs -%}
-				<b>Favs:</b> {{book.metadata.favs}} / 
-			{%-endif %}
+				{%- if needs_slash %} / {% endif -%}
+				<b>Favs:</b> {{book.metadata.favs}}
+				{% set needs_slash = 1 %}
+			{%- endif %}
 			{% if book.metadata.follows -%}
+				{%- if needs_slash %} / {% endif -%}
 				<b>Follows:</b> {{book.metadata.follows}}
-			{%-endif %}
+				{% set needs_slash = 1 %}
+			{%- endif %}
 		</p>
 	</div>
 </body>
