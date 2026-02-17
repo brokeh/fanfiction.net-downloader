@@ -45,10 +45,9 @@ if args.publish:
 output_file_name = local_file_path('fanfiction.net-download.user.js')
 with open(output_file_name, 'w', encoding='utf-8') as f:
     f.write(final_script)
+print(f'Successfully generated {output_file_name}')
 
-if args.publish:
-    output_file_name = local_file_path('fanfiction.net-download.meta.js')
-    with open(output_file_name, 'w', encoding='utf-8') as f:
-        f.write(extract_gm_metadata(final_script))
-
+output_file_name = local_file_path('fanfiction.net-download.meta.js')
+with open(output_file_name, 'w', encoding='utf-8') as f:
+    f.write(extract_gm_metadata(final_script))
 print(f'Successfully generated {output_file_name}')
