@@ -19,18 +19,17 @@ fn main() {
             return;
         }
     };
-    let mut output_file = match File::create(&output_filename) {
+    let mut output_file = match File::create(output_filename) {
         Ok(f) => f,
         Err(err) => {
-            println!("Failed to open {} for writing: {}", output_filename, err);
+            println!("Failed to open {output_filename} for writing: {err}");
             return;
         }
     };
     match build_epub_to(book_json.as_str(), &mut output_file) {
-        Ok(_) => println!("Successfully wrote story to {}", output_filename),
+        Ok(()) => println!("Successfully wrote story to {output_filename}"),
         Err(err) => {
-            println!("Failed to convert JSON to EPUB: {}", err);
-            return;
+            println!("Failed to convert JSON to EPUB: {err}");
         }
-    };
+    }
 }
