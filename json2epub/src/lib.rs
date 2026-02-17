@@ -85,6 +85,16 @@ fn format_epoch_time(epoch_seconds: i64, format: &str) -> Option<String> {
     }
     None
 }
+
+fn chapter_description(chapter: &json_types::Chapter, book: &json_types::Book) -> String {
+    if book.chapters.len() == 1 && chapter.title.is_empty() {
+        return book.title.clone();
+    }
+    if chapter.title.is_empty() {
+        return format!("Chapter {}", chapter.num);
+    }
+    format!("Chapter {}: {}", chapter.num, chapter.title)
+}
  
 // Try to print Zip file to stdout
 fn prepare_epub(jinja_env: &Environment, book: &json_types::Book) -> Result<EpubBuilder<ZipLibrary>> {
@@ -110,7 +120,7 @@ fn prepare_epub(jinja_env: &Environment, book: &json_types::Book) -> Result<Epub
         let content = render_chapter_template(jinja_env, book, chapter)?;
         builder.add_content(
             EpubContent::new(format!("chapter_{}.xhtml", chapter.num), content.as_bytes())
-            .title(format!("Chapter {}: {}", chapter.num, chapter.title))
+            .title(chapter_description(chapter, book))
             .reftype(ReferenceType::Text),
         )?;
     }

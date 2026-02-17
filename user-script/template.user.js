@@ -279,26 +279,40 @@
         }
 
         const first_chapter_selector = html_doc.getElementById('chap_select'); // There's a 2nd one with the same ID at the bottom of the page
-        const current_chapter = parseInt(html_doc.getElementById('chap_select').value);
+        if (first_chapter_selector) {
+            const current_chapter = parseInt(first_chapter_selector.value);
 
-        for (const chapterSelect of first_chapter_selector.querySelectorAll('#chap_select > option')) {
-            const chapter_num_str = chapterSelect.value;
-            const chapter_num = parseInt(chapter_num_str);
-            var chapter_title = chapterSelect.innerText;
-            if (chapter_title.startsWith(chapter_num_str + '.')) {
-                chapter_title = chapter_title.substring(chapter_num_str.length + 1).trim();
+            for (const chapterSelect of first_chapter_selector.getElementsByTagName('option')) {
+                const chapter_num_str = chapterSelect.value;
+                const chapter_num = parseInt(chapter_num_str);
+                var chapter_title = chapterSelect.innerText;
+                if (chapter_title.startsWith(chapter_num_str + '.')) {
+                    chapter_title = chapter_title.substring(chapter_num_str.length + 1).trim();
+                }
+                var chapter = {
+                    num: chapter_num,
+                    title: chapter_title,
+                    url: make_url_desktop(chapter_num),
+                    contents: null,
+                    error: null
+                };
+                if (chapter_num == current_chapter) {
+                    parse_chapter_desktop(html_doc, chapter);
+                }
+                book.chapters.push(chapter);
             }
-            var chapter = {
-                num: chapter_num,
-                title: chapter_title,
-                url: make_url_desktop(chapter_num),
+        }
+        else {
+            // Only a single chapter
+            var only_chapter = {
+                num: 1,
+                title: "",
+                url: make_url_desktop(1),
                 contents: null,
                 error: null
             };
-            if (chapter_num == current_chapter) {
-                parse_chapter_desktop(html_doc, chapter);
-            }
-            book.chapters.push(chapter);
+            parse_chapter_desktop(html_doc, only_chapter);
+            book.chapters.push(only_chapter);
         }
 
         return book;

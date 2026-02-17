@@ -1,10 +1,20 @@
 <html>
 <head>
-	<title>Chapter {{chapter.num}}: {{chapter.title}}</title>
+	<title>
+		{%- if (book.chapters|length) == 1 and not chapter.title -%}
+			{{book.title}}
+		{%- else -%}
+			{%- if (book.chapters|length) > 1 %}Chapter {{chapter.num}}{% endif -%}
+			{%- if (book.chapters|length) > 1 and chapter.title %}: {% endif -%}
+			{%- if chapter.title %}{{chapter.title}}{% endif -%}
+		{%- endif -%}
+	</title>
 	<link rel="stylesheet" href="style/main.css" type="text/css" />
 </head>
 <body>
-	<h2>Chapter {{chapter.num}}: {{chapter.title}}</h2>
+	{% if chapter.num > 0 -%}
+		<h2>Chapter {{chapter.num}}: {{chapter.title}}</h2>
+	{%- endif %}
 	{{chapter.contents|safe}}
 </body>
 </html>
