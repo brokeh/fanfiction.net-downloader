@@ -15,6 +15,7 @@ pub struct Metadata {
     pub characters: Option<String>,
     pub chapters: Option<String>,
     pub words: Option<String>,
+    pub status: Option<String>,
     pub reviews: Option<String>,
     pub favs: Option<String>,
     pub follows: Option<String>,

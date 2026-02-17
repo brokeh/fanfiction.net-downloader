@@ -30,7 +30,9 @@
 		</p>
 		#}
 		<p>
-			{# <b>Status:</b> {{book.status}}<br/> #}
+			{% if book.metadata.status -%}
+				<b>Status:</b> {{book.metadata.status}}<br/>
+			{%- endif %}
 			<b>Published:</b> {{book.created_time|format_epoch_time('%e %b %Y')}}<br/>
 			{% if book.updated_time -%}
 				<b>Updated:</b> {{book.updated_time|format_epoch_time('%e %b %Y')}}<br/>

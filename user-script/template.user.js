@@ -267,6 +267,7 @@
                 characters: extract_anonymous_metadata(metadata, 2),
                 chapters: extract_named_metadata(metadata, 'Chapters'),
                 words: extract_named_metadata(metadata, 'Words'),
+                status: extract_named_metadata(metadata, 'Status'),
                 reviews: extract_named_metadata(metadata, 'Reviews'),
                 favs: extract_named_metadata(metadata, 'Favs'),
                 follows: extract_named_metadata(metadata, 'Follows'),
