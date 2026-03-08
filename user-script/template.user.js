@@ -319,12 +319,27 @@
     }
 
     function sanitise_as_xhtml(node) {
-        return new XMLSerializer().serializeToString(node);
+        const xml_doc = new XMLSerializer().serializeToString(node);
+        const re_xmlns = / xmlns="([^"]+)"/g;
+        const matches = xml_doc.matchAll(re_xmlns).toArray();
+        if (matches.length == 1) {
+            if (matches[0][1] != 'http://www.w3.org/1999/xhtml') {
+                throw new Error(`Unexpected xmlns ${matches[0][1]}`);
+            }
+        } else if (matches.length > 1) {
+            throw new Error(`Too many xmlns entries found`);
+        }
+        return xml_doc.replace(re_xmlns, '');
     }
 
     function parse_chapter_desktop(html_doc, chapter) {
-        chapter.contents = sanitise_as_xhtml(html_doc.getElementById('storytext'));
-        chapter.error = null;
+        try {
+            chapter.contents = sanitise_as_xhtml(html_doc.getElementById('storytext'));
+            chapter.error = null;
+        }
+        catch (error) {
+            chapter.error = error;
+        }
     }
 
     function parse_chapter_mobile(html_doc, chapter) {
